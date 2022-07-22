@@ -1,0 +1,25 @@
+<h1><%= @movie.title %></h1>
+
+<div id="movie-<%=@movie.id%>">
+   <p>Creation Year: <%= @movie.creation_year%></p>
+   <p>Genre: <%= @movie.genre %></p>
+</div>
+
+<div id="movie-<%=@movie.id%>-actors">
+   <% @movie.actors_sorted_by_age.each do |actor| %>
+      <p><%= actor.name %></p>
+   <% end %>
+</div>
+<div id="movie-<%=@movie.id%>-actors-average-age">
+   <p>Average Age: <%= @movie.actors_average_age %></p>
+</div>
+
+<hr/>
+<div id="add_actor_form">
+   <%= form_with url: "/actors", id: "add_actor", method: :get, local: true do |f| %>
+      <%= f.label :search %>
+      <%= f.text_field :search %>
+      <%= f.hidden_field :movie_id, :value => @movie.id %>
+      <%= f.submit "Search for Actor" %>
+   <% end %>
+</div>
